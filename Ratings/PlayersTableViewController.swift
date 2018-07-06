@@ -13,6 +13,23 @@ class PlayersTableViewController: UITableViewController {
     //MARK: - Properties
     var players = SampleData.generatePlayersData()
 }
+
+//MARK: - IBActions
+extension PlayersTableViewController{
+    @IBAction func  cancelToPlayersTableViewController(_ segue: UIStoryboardSegue){
+        
+    }
+    @IBAction func  savePlayerDetails(_ segue: UIStoryboardSegue){
+        guard let playerDetailsViewController = segue.source as? PlayerDetailsTableViewController,
+        let player = playerDetailsViewController.player else {
+            return
+        }
+        players.append(player)
+        let indexPath = IndexPath(row:players.count-1,section:0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+    }
+}
+
 //MARK: - UITableViewDataSource
 extension PlayersTableViewController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
